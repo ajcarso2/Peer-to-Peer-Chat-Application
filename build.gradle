@@ -1,0 +1,43 @@
+// set as java application
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'org.json', name: 'json', version: '20220320'
+}
+
+//define main class
+mainClassName = 'Peer'
+
+tasks.register('runPeer', JavaExec) {
+    description 'Runs a peer'
+
+    classpath = sourceSets.main.runtimeClasspath
+
+    main = 'Peer'
+    standardInput = System.in
+
+    args 'name' // username
+    args '7000' // port
+}
+
+tasks.register('runClientThread', JavaExec) {
+    description 'Runs a ClientThread'
+
+    classpath = sourceSets.main.runtimeClasspath
+
+    main = 'ClientThread'
+    standardInput = System.in
+}
+
+tasks.register('runServerThread', JavaExec) {
+    description 'Runs a ServerThread'
+
+    classpath = sourceSets.main.runtimeClasspath
+
+    main = 'ServerThread'
+    standardInput = System.in
+}
